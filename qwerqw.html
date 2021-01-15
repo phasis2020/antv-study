@@ -1,0 +1,795 @@
+<html>
+
+<head>
+  <style>
+    html {
+      background-color: transparent;
+    }
+
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .companys {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .companys .center_ {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 196px;
+      background-size: contain;
+      text-align: center;
+    }
+
+    .companys .center_ .text1 {
+      font-size: 18px;
+      font-weight: 700;
+      padding-top: 48px;
+      padding-bottom: 8px;
+      background-image: -webkit-linear-gradient(bottom, #00b1fd, #00fcee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .companys .center_ .text2 {
+      font-size: 18px;
+      font-weight: 700;
+      padding-bottom: 8px;
+      background-image: -webkit-linear-gradient(bottom, #00b1fd, #00fcee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .companys .center_ .text3 {
+      display: flex;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 700;
+      color: #00eff0;
+      /*
+background-image: -webkit-linear-gradient(bottom, #00b1fd, #00fcee);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;*/
+    }
+
+    .companys .center_ .text3 span {
+      color: #00eff0;
+    }
+
+    .companys .left_,
+    .companys .right_ {
+      position: absolute;
+      width: 140px;
+      height: 64px;
+      display: flex;
+    }
+
+    .companys .left_ .text .name1,
+    .companys .right_ .text .name1 {
+      color: #00ccff;
+      font-size: 14px;
+      height: 33px;
+      line-height: 33px;
+    }
+
+    .companys .left_ .text .name2,
+    .companys .right_ .text .name2 {
+      height: 38px;
+      line-height: 38px;
+      display: flex;
+    }
+
+    .companys .left_ .text .name2 span:first-child,
+    .companys .right_ .text .name2 span:first-child {
+      color: #ffaa23;
+      font-size: 22px;
+      vertical-align: top;
+      margin-right: 8px;
+    }
+
+    .companys .left_ .text .name2 span:last-child,
+    .companys .right_ .text .name2 span:last-child {
+      vertical-align: top;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .companys .left_ .bg,
+    .companys .right_ .bg {
+      width: 66px;
+      height: 55px;
+      background: url('http://39.100.50.234:18080/images/gai_1_22.png') no-repeat center;
+      background-size: contain;
+      cursor: pointer;
+    }
+
+    .companys .left_01 {
+      top: 24px;
+      left: 72px;
+    }
+
+    .companys .left_01:hover .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_13.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_01.active .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_13.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_02 {
+      top: 140px;
+      left: 40px;
+    }
+
+    .companys .left_02:hover .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_14.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_02 .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_23.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_02.active .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_14.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_03 {
+      bottom: 16px;
+      left: 16px;
+      width: 192px;
+    }
+
+    .companys .left_03 .text {
+      width: 120px;
+    }
+
+    .companys .left_03 .text .name2 {
+      padding-left: 40px;
+    }
+
+    .companys .left_03:hover .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_15.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_03 .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_24.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .left_03.active .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_15.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_01 {
+      top: 24px;
+      right: 60px;
+
+    }
+
+    .companys .right_01:hover .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_16.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_01 .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_25.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_01.active .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_16.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_02 {
+      top: 140px;
+      right: 25px;
+    }
+
+    .companys .right_02:hover .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_17.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_02 .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_26.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_02.active .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_17.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_03 {
+      bottom: 16px;
+      right: 64px;
+    }
+
+    .companys .right_03:hover .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_18.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_03 .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_27.png') no-repeat center;
+      background-size: contain;
+    }
+
+    .companys .right_03.active .bg {
+      background: url('http://39.100.50.234:18080/images/gai_1_18.png') no-repeat center;
+      background-size: contain;
+    }
+
+    @-webkit-keyframes rotation {
+
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+
+    }
+
+    .an {
+
+      -webkit-transform: rotate(360deg);
+
+      animation: rotation 10s linear infinite;
+
+      -moz-animation: rotation 10s linear infinite;
+
+      -webkit-animation: rotation 10s linear infinite;
+
+      -o-animation: rotation 10s linear infinite;
+
+    }
+  </style>
+  <!-- 下面的注释的script（jquery、echarts世界地图、echarts GL、D3等），您可以根据需要自己引入 -->
+  <script src="/static/sugar/static/js/jquery.min.js"></script>
+  <script src="/static/sugar/static/js/echarts-4.1.0.min.js"></script>
+  <script src="/static/sugar/static/js/echarts-china.min.js"></script>
+  <!--<script src="/static/sugar/static/js/echarts-world.min.js"></script>-->
+  <!--<script src="/static/sugar/static/js/echarts-gl-1.1.1.min.js"></script>-->
+  <!--<script src="/static/sugar/static/js/echarts-liquidfill-2.0.4.min.js"></script>-->
+  <!--<script src="/static/sugar/static/js/echarts-wordcloud-1.1.3.min.js"></script>-->
+  <!--<script src="/static/sugar/static/js/d3.min.js"></script>-->
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script>
+    (function () {
+      var chart = echarts.init(document.querySelector('#container'));
+      function render(param) {
+        $.ajax({
+          type: 'get',
+          url: 'http://39.100.50.234:18080/apisugarservice/getIndex',
+          data: {},
+          async: false,
+          success(res) {
+            console.log('产业指标')
+            console.log(res)
+            if (res != null && res != "" && res.length > 0) {
+              if (res.length == 12) {
+                var html_ = `<div class="companys">
+                  <div class="center_" style="background:none">
+                      <img class="an" src='http://39.100.50.234:18080/images/gai_1_361.png'
+                           style=" width: 200px;height: 196px;position: absolute;top:0;left:0;z-index:-666">
+                      <div class="text1" id="crcle_change_name">龙头企业</div>
+                      <div class="text2" id="crcle_change_num">${res[1].value[2]}%</div>
+                      <div class="text3"><span class="counter-value3" id="crcele_data_num">${res[0].value[0]}</span>
+                          <span>个</span></div>
+                  </div>
+                  <div class="left_ left_01 active" data-value="1">
+                      <div class="text">
+                          <div class="name1" id="rcele_num1">龙头企业</div>
+                          <div style="display:none" id="drcele_num1">${res[1].value[2]}</div>
+                          <div style="display:none" id="ercele_num1">${res[1].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num1">${res[1].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_02" data-value="2">
+                      <div class="text">
+                          <div class="name1" id="rcele_num2">专业大户</div>
+                          <div style="display:none" id="drcele_num2">${res[7].value[2]}</div>
+                          <div style="display:none" id="ercele_num2">${res[7].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num2">${res[7].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_03" data-value="3">
+                      <div class="text">
+                          <div class="name1" id="rcele_num3">农民专业合作组织</div>
+                          <div style="display:none" id="drcele_num3">${res[3].value[2]}</div>
+                          <div style="display:none" id="ercele_num3">${res[3].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num3">${res[3].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="right_ right_03 left_" data-value="4">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num4">其他组织</div>
+                          <div style="display:none" id="drcele_num4">${res[11].value[2]}</div>
+                          <div style="display:none" id="ercele_num4">${res[11].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num4">${res[11].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_02 left_" data-value="5">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num5">家庭农场</div>
+                          <div style="display:none" id="drcele_num5">${res[5].value[2]}</div>
+                          <div style="display:none" id="ercele_num5">${res[5].value[1]}}</div>
+                          <div class="name2">
+                              <span id="crcele_num5">${res[5].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_01 left_" data-value="6">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num6">农资经营店</div>
+                          <div style="display:none" id="drcele_num6">${res[9].value[2]}</div>
+                          <div style="display:none" id="ercele_num6">${res[9].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num6">${res[9].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>`
+              } else {
+                var html_ = `<div class="companys">
+                  <div class="center_" style="background:none">
+                      <img class="an" src='http://39.100.50.234:18080/images/gai_1_361.png'
+                           style=" width: 200px;height: 196px;position: absolute;top:0;left:0;z-index:-666">
+                      <div class="text1" id="crcle_change_name">龙头企业</div>
+                      <div class="text2" id="crcle_change_num">${res[0].value[2]}%</div>
+                      <div class="text3"><span class="counter-value3" id="crcele_data_num">${res[0].value[0]}</span>
+                          <span>个</span></div>
+                  </div>
+                  <div class="left_ left_01 active" data-value="1">
+                      <div class="text">
+                          <div class="name1" id="rcele_num1">龙头企业</div>
+                          <div style="display:none" id="drcele_num1">${res[0].value[2]}</div>
+                          <div style="display:none" id="ercele_num1">${res[0].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num1">${res[0].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_02" data-value="2">
+                      <div class="text">
+                          <div class="name1" id="rcele_num2">专业大户</div>
+                          <div style="display:none" id="drcele_num2">${res[3].value[2]}</div>
+                          <div style="display:none" id="ercele_num2">${res[3].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num2">${res[3].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_03" data-value="3">
+                      <div class="text">
+                          <div class="name1" id="rcele_num3">农民专业合作组织</div>
+                          <div style="display:none" id="drcele_num3">${res[1].value[2]}</div>
+                          <div style="display:none" id="ercele_num3">${res[1].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num3">${res[1].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="right_ right_03 left_" data-value="4">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num4">其他组织</div>
+                          <div style="display:none" id="drcele_num4">${res[5].value[2]}</div>
+                          <div style="display:none" id="ercele_num4">${res[5].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num4">${res[5].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_02 left_" data-value="5">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num5">家庭农场</div>
+                          <div style="display:none" id="drcele_num5">${res[2].value[2]}</div>
+                          <div style="display:none" id="ercele_num5">${res[2].value[1]}}</div>
+                          <div class="name2">
+                              <span id="crcele_num5">${res[2].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_01 left_" data-value="6">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num6">农资经营店</div>
+                          <div style="display:none" id="drcele_num6">${res[4].value[2]}</div>
+                          <div style="display:none" id="ercele_num6">${res[4].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num6">${res[4].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>`
+              }
+              $('#container').html(html_)
+            } else {
+              var html_ = `<div class="companys">
+                  <div class="center_" style="background:none">
+                      <img class="an" src='http://39.100.50.234:18080/images/gai_1_361.png'
+                           style=" width: 200px;height: 196px;position: absolute;top:0;left:0;z-index:-666">
+                      <div class="text1" id="crcle_change_name">龙头企业</div>
+                      <div class="text2" id="crcle_change_num">0%</div>
+                      <div class="text3"><span class="counter-value3" id="crcele_data_num">0</span>
+                          <span>个</span></div>
+                  </div>
+                  <div class="left_ left_01 active" data-value="1">
+                      <div class="text">
+                          <div class="name1" id="rcele_num1">龙头企业</div>
+                          <div style="display:none" id="drcele_num1">0</div>
+                          <div style="display:none" id="ercele_num1">0</div>
+                          <div class="name2">
+                              <span id="crcele_num1">0</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_02" data-value="2">
+                      <div class="text">
+                          <div class="name1" id="rcele_num2">专业大户</div>
+                          <div style="display:none" id="drcele_num2">0</div>
+                          <div style="display:none" id="ercele_num2">0</div>
+                          <div class="name2">
+                              <span id="crcele_num2">0</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_03" data-value="3">
+                      <div class="text">
+                          <div class="name1" id="rcele_num3">农民专业合作组织</div>
+                          <div style="display:none" id="drcele_num3">0</div>
+                          <div style="display:none" id="ercele_num3">0</div>
+                          <div class="name2">
+                              <span id="crcele_num3">0</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="right_ right_03 left_" data-value="4">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num4">其他组织</div>
+                          <div style="display:none" id="drcele_num4">0</div>
+                          <div style="display:none" id="ercele_num4">0</div>
+                          <div class="name2">
+                              <span id="crcele_num4">0</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_02 left_" data-value="5">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num5">家庭农场</div>
+                          <div style="display:none" id="drcele_num5">0</div>
+                          <div style="display:none" id="ercele_num5">0</div>
+                          <div class="name2">
+                              <span id="crcele_num5">0</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_01 left_" data-value="6">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num6">农资经营店</div>
+                          <div style="display:none" id="drcele_num6">0</div>
+                          <div style="display:none" id="ercele_num6">0</div>
+                          <div class="name2">
+                              <span id="crcele_num6">0</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>`
+              $('#container').html(html_)
+            }
+          },
+        })
+      }
+
+      // 触发联动或下钻行为，如果没开启下钻和联动，则可以删除该处代码
+      // 功能说明：1、主要用于当开启自定义图表下钻或者联动时，获取用于传递给下钻或联动图表的参数
+      //         2、点击时可以获取点击图形的当前值
+      // ------------------------------------------
+      chart.on('click', function (params) {
+        delete params.event
+        window.parent.postMessage({
+          sugarUrl: window.location.href,
+          sugarData: params, // 自定义图表传递给下钻或联动图表的参数
+          isDD: true, // 自定义图表触发下钻和联动的关键字(触发下钻和联动功能的必填字段-不可删除)
+        }, '*');
+      })
+      // ------------------------------------------
+
+      // 作用：用于监页面大小的更改，从而实现图表宽度的自适应
+      window.addEventListener('resize', function () {
+        try {
+          chart && chart.resize && chart.resize();
+        } catch (e) {
+          window.parent.postMessage({
+            sugarUrl: window.location.href,
+            sugarError: {
+              message: e.message
+            }
+          }, '*');
+          throw e;
+        }
+      });
+      // ---------------------------------------
+
+      // 以下内容不需要修改
+      // 字段说明：
+      //        sugarUrl: 自定义图表所在页面地址
+      //        sugarRender：自定义图表是否渲染成功
+      //        sugarError: 自定义图表渲染失败后的信息
+      // ---------------------------------------
+      // 作用：自定义图表渲染完成后通知外界
+      window.parent.postMessage({
+        sugarUrl: window.location.href,
+        sugarRender: true
+      }, '*');
+
+      // 作用：监听传递给自定义图表的数据，然后进行图表的渲染
+      window.addEventListener('message', function (event) {
+        try {
+          render(event.data);
+        } catch (e) {
+          window.parent.postMessage({
+            sugarUrl: window.location.href,
+            sugarError: {
+              message: e.message
+            }
+          }, '*');
+          throw e;
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    f1()
+    var time_
+    function f1() {
+      clearInterval(time_)
+      var j = 0
+      time_ = setInterval(() => {
+        $('.companys .left_:eq(' + j + ')')
+          .addClass('active')
+          .siblings('.left_')
+          .removeClass('active')
+
+        var divid = $('.companys .left_:eq(' + j + ') .name1').attr("id");
+        $('#crcle_change_name').html(
+          $('.companys .left_:eq(' + j + ') .name1').html()
+        )
+        if ($('#d' + divid).html().indexOf("-") > -1) {
+          // $('#crcle_change_num').html("比去年减少"+$('#e'+divid).html().substring(1,$('#e'+divid).html().length)+"个,"+$('#d'+divid).html()+"%")
+          $('#crcle_change_num').html($('#d' + divid).html() + "%")
+        } else {
+          // $('#crcle_change_num').html("比去年增加"+$('#e'+divid).html()+"个,"+$('#d'+divid).html()+"%")
+          $('#crcle_change_num').html($('#d' + divid).html() + "%")
+        }
+        $('#crcele_data_num').html(
+          $('#c' + divid).html()
+        )
+
+        numInit3()
+        j++
+        if (j >= 6) {
+          clearInterval(time_)
+          f1()
+        }
+      }, 10000)
+    }
+
+
+    function numInit3() {
+      $('.counter-value3').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: $(this).text(),
+            },
+            {
+              duration: 2500,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(now.toFixed(0))
+              },
+            }
+          )
+      })
+    }
+    $('#container').on('click', '.left_', function () {
+      clearInterval(time_)
+      let wen = $(this).children('.text')
+      $(this).addClass('active').siblings('.left_').removeClass('active')
+      $('#crcle_change_name').html(wen.children('.name1')[0].innerText)
+      $('#crcele_data_num').html(wen.children('.name2').children('span')[0].innerText)
+      $('#crcle_change_num').html(wen.children('div')[1].innerText + '%')
+      numInit3()
+    })
+    $('#container').on('mouseleave', '.companys', function () {
+      f1()
+    })
+
+    setInterval(() => {
+      getdatatotalnumall()
+    }, 600000)
+
+    function getdatatotalnumall() {
+      clearInterval(time_)
+      $.ajax({
+        type: 'get',
+        url: 'http://39.100.50.234:18080/apisugarservice/getIndex',
+        data: {},
+        async: false,
+        success(res) {
+          if (res != null && res != "" && res.length > 0) {
+
+            var html_ = `<div class="companys">
+                  <div class="center_" style="background:none">
+                      <img class="an" src='http://39.100.50.234:18080/images/gai_1_361.png'
+                           style=" width: 200px;height: 196px;position: absolute;top:0;left:0;z-index:-666">
+                      <div class="text1" id="crcle_change_name">龙头企业</div>
+                      <div class="text2" id="crcle_change_num">${res[0].value[2]}%</div>
+                      <div class="text3"><span class="counter-value3" id="crcele_data_num">${res[0].value[0]}</span>
+                          <span>个</span></div>
+                  </div>
+                  <div class="left_ left_01 active" data-value="1">
+                      <div class="text">
+                          <div class="name1" id="rcele_num1">龙头企业</div>
+                          <div style="display:none" id="drcele_num1">${res[0].value[2]}</div>
+                          <div style="display:none" id="ercele_num1">${res[0].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num1">${res[0].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_02" data-value="2">
+                      <div class="text">
+                          <div class="name1" id="rcele_num2">专业大户</div>
+                          <div style="display:none" id="drcele_num2">${res[3].value[2]}</div>
+                          <div style="display:none" id="ercele_num2">${res[3].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num2">${res[3].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="left_ left_03" data-value="3">
+                      <div class="text">
+                          <div class="name1" id="rcele_num3">农民专业合作组织</div>
+                          <div style="display:none" id="drcele_num3">${res[1].value[2]}</div>
+                          <div style="display:none" id="ercele_num3">${res[1].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num3">${res[1].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+                      <div class="bg"></div>
+                  </div>
+                  <div class="right_ right_03 left_" data-value="4">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num4">其他组织</div>
+                          <div style="display:none" id="drcele_num4">${res[5].value[2]}</div>
+                          <div style="display:none" id="ercele_num4">${res[5].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num4">${res[5].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_02 left_" data-value="5">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num5">家庭农场</div>
+                          <div style="display:none" id="drcele_num5">${res[2].value[2]}</div>
+                          <div style="display:none" id="ercele_num5">${res[2].value[1]}}</div>
+                          <div class="name2">
+                              <span id="crcele_num5">${res[2].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="right_ right_01 left_" data-value="6">
+                      <div class="bg"></div>
+                      <div class="text">
+                          <div class="name1" id="rcele_num6">农资经营店</div>
+                          <div style="display:none" id="drcele_num6">${res[4].value[2]}</div>
+                          <div style="display:none" id="ercele_num6">${res[4].value[1]}</div>
+                          <div class="name2">
+                              <span id="crcele_num6">${res[4].value[0]}</span>
+                              <span>个</span>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>`
+
+            $('#container').html(html_)
+            f1()
+
+          }
+        },
+      })
+    }
+  </script>
+</body>
+
+</html>

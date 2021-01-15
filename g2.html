@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>g2示例</title>
+  <style>
+    .container {
+      width: 500px;
+      height: 300px;
+      background-color: #eee;
+      margin: 10px;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="container1"></div>
+  <div class="container" id="container2"></div>
+  <div class="container" id="container3"></div>
+  <div class="container" id="container4"></div>
+  <div class="container" id="container5"></div>
+  <div class="container" id="container6"></div>
+  <div class="container" id="container7"></div>
+  <div class="container" id="container8"></div>
+  <div class="container" id="container9"></div>
+  <div class="container" id="container10"></div>
+  <div class="container" id="container11"></div>
+</body>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/g2plot.min.js"></script>
+
+<script>
+  const { Line, Area, Column, Pie, measureTextWidth, Liquid } = G2Plot;
+  function container1() {
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/e00d52f4-2fa6-47ee-a0d7-105dd95bde20.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const linePlot = new Line('container1', {
+          data,
+          xField: 'year',
+          yField: 'gdp',
+          seriesField: 'name',
+          yAxis: {
+            label: {
+              formatter: (v) => `${(v / 10e8).toFixed(1)} B`,
+            },
+          },
+          legend: {//图例,只有多系列才可开启图例,单系列无法开启
+            position: 'top',
+          },
+          smooth: true,//曲线是否平滑
+          animation: {
+            appear: {
+              animation: 'path-in',
+              duration: 5000,
+            },
+          },
+          color: ['blue', 'red', '#FAA219', 'green', 'gold'],//指定折线颜色
+        });
+
+        linePlot.render();
+      });
+  }
+
+  function container2() {
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const area = new Area('container2', {
+          data,
+          xField: 'Date',
+          yField: 'scales',
+          xAxis: {
+            range: [0, 1],
+            tickCount: 5,
+          },
+          areaStyle: () => {//绘图属性里面有各种渐变
+            return {
+              fill: 'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff',
+            };
+          },
+        });
+        area.render();
+      });
+  }
+
+  function container3() {
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/b21e7336-0b3e-486c-9070-612ede49284e.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const area = new Area('container3', {
+          data,
+          xField: 'date',
+          yField: 'value',
+          seriesField: 'country',
+        });
+        area.render();
+      });
+  }
+
+  function container4() {
+    const data = [
+      {
+        type: '家具家电',
+        sales: 38,
+      },
+      {
+        type: '粮油副食',
+        sales: 52,
+      },
+      {
+        type: '生鲜水果',
+        sales: 61,
+      },
+      {
+        type: '美容洗护',
+        sales: 145,
+      },
+      {
+        type: '母婴用品',
+        sales: 48,
+      },
+      {
+        type: '进口食品',
+        sales: 38,
+      },
+      {
+        type: '食品饮料',
+        sales: 38,
+      },
+      {
+        type: '家庭清洁',
+        sales: 38,
+      },
+    ];
+    const columnPlot = new Column('container4', {
+      data,
+      xField: 'type',
+      yField: 'sales',
+      xAxis: {
+        label: {
+          autoHide: true,
+          autoRotate: false,
+        },
+      },
+      tooltip: {
+        customContent: (title, data) => {//tooltip自定义模板
+          // console.log(title);
+          // console.log(data);
+          var html_ = ''
+          if (data.length != 0) {
+            html_ = '<div style="padding:5px;"><div style="margin-bottom:5px">' + title + '</div><div>' + data[0].name + ' : ' + data[0].value + '万吨</div></div>'
+            return html_
+          }
+          html_ = '<div style="padding:5px;"><div>' + title + '</div><div>' + title + '</div></div>'
+
+          return html_
+        }
+      },
+      meta: {
+        type: {
+          alias: '类别',
+        },
+        sales: {
+          alias: '销售额',
+        },
+      },
+      minColumnWidth: 20,
+      maxColumnWidth: 20,
+      color: ({ type }) => {
+        //indexOf返回食品在type中首次出现的位置的索引,如果没有出现则返回-1
+        if (type.indexOf('食品') != -1) {
+          return '#F4664A';
+        }
+        return '#5B8FF9';
+      },
+      legend: {//注意单个系列的图表无法开启图例
+        position: 'top',
+      },
+    });
+    columnPlot.render();
+  }
+
+  function container5() {
+    fetch('https://gw.alipayobjects.com/os/antfincdn/PC3daFYjNw/column-data.json')
+      .then((data) => data.json())
+      .then((data) => {
+        const column = new Column('container5', {
+          data,
+          xField: 'city',
+          yField: 'value',
+          seriesField: 'type',
+          isGroup: 'true',
+          columnStyle: {
+            radius: [20, 20, 0, 0],
+          },
+          // legend:false
+        });
+
+        column.render();
+      });
+  }
+
+  function container6() {
+    const data = [
+      { type: '分类一', value: 27 },
+      { type: '分类二', value: 25 },
+      { type: '分类三', value: 18 },
+      { type: '分类四', value: 15 },
+      { type: '分类五', value: 10 },
+      { type: '其他', value: 5 },
+    ];
+
+    const piePlot = new Pie('container6', {
+      appendPadding: 10,
+      data,
+      angleField: 'value',
+      colorField: 'type',
+      radius: 0.8,
+      label: {
+        type: 'outer',
+        content: '{name} {percentage}',
+      },
+      interactions: [{ type: 'pie-legend-active' }, { type: 'element-active' }],
+    });
+
+    piePlot.render();
+  }
+
+  function container7() {
+    function renderStatistic(containerWidth, text, style) {
+      const { width: textWidth, height: textHeight } = measureTextWidth(text, style);
+      const R = containerWidth / 2;
+      // r^2 = (w / 2)^2 + (h - offsetY)^2
+      let scale = 1;
+      if (containerWidth < textWidth) {
+        scale = Math.min(Math.sqrt(Math.abs(Math.pow(R, 2) / (Math.pow(textWidth / 2, 2) + Math.pow(textHeight, 2)))), 1);
+      }
+      const textStyleStr = `width:${containerWidth}px;`;
+      return `<div style="${textStyleStr};font-size:${scale}em;line-height:${scale < 1 ? 1 : 'inherit'};">${text}</div>`;
+    }
+
+    const data = [
+      { type: '分类一', value: 27 },
+      { type: '分类二', value: 25 },
+      { type: '分类三', value: 18 },
+      { type: '分类四', value: 15 },
+      { type: '分类五', value: 10 },
+      { type: '其他', value: 5 },
+    ];
+
+    const piePlot = new Pie('container7', {
+      appendPadding: 10,
+      data,
+      angleField: 'value',
+      colorField: 'type',
+      radius: 1,
+      innerRadius: 0.64,
+      meta: {
+        value: {
+          formatter: (v) => `${v} ¥`,
+        },
+      },
+      label: {
+        type: 'inner',
+        offset: '-50%',
+        style: {
+          textAlign: 'center',
+        },
+        autoRotate: false,
+        content: '{value}',
+      },
+      statistic: {
+        title: {
+          offsetY: -4,
+          customHtml: (container, view, datum) => {
+            const { width, height } = container.getBoundingClientRect();
+            const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+            const text = datum ? datum.type : '总计';
+            return renderStatistic(d, text, { fontSize: 28 });
+          },
+        },
+        content: {
+          offsetY: 4,
+          style: {
+            fontSize: '32px',
+          },
+          customHtml: (container, view, datum, data) => {
+            const { width } = container.getBoundingClientRect();
+
+            const text = datum ? `¥ ${datum.value}` : `¥ ${data.reduce((r, d) => r + d.value, 0)}`;
+            return renderStatistic(width, text, { fontSize: 32 });
+          },
+        },
+      },
+      // 添加 中心统计文本 交互
+      interactions: [{ type: 'element-selected' }, { type: 'element-active' }, { type: 'pie-statistic-active' }],
+    });
+
+    piePlot.render();
+  }
+
+  function container8() {
+    const liquidPlot = new Liquid('container8', {
+      percent: 0.5,
+      radius: 0.8,//外环的半径 [0-1]，相对于画布宽高的最小值来计算的
+      outline: {
+        border: 4,
+        distance: 8,
+      },
+      wave: {
+        length: 128,//水波的波长度
+      },
+    });
+    liquidPlot.render();
+  }
+
+  function container9() { }
+
+  function container10() { }
+  function container11() { }
+
+  function init() {
+    container1()
+    container2()
+    container3()
+    container4()
+    container5()
+    container6()
+    container7()
+    container8()
+    container9()
+    container10()
+    container11()
+  }
+
+  init()
+
+</script>
+
+</html>

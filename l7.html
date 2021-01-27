@@ -250,6 +250,12 @@
           }
         }
       })
+
+      fetch('/js/geoinfo-all.json')
+        .then(d => d.json())
+        .then(v => {
+          console.log(v);
+        })
     })
 
   </script>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>全国地图飞线案例</title>
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    html,
+    body {
+      overflow: hidden;
+      margin: 0;
+    }
+
+    #map {
+      width: 800px;
+      height: 500px;
+      background-color: #2b2b3a;
+    }
+
+    #map>div {
+      width: 800px !important;
+      height: 500px !important;
+    }
+
+    #map>.l7-scene {
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+  <!-- <script src="https://unpkg.com/@antv/l7"></script> -->
+  <script src="js/l7.js"></script>
+  <!-- <script src="https://unpkg.com/@antv/l7-district"></script> -->
+  <script src="js/l7-district.js"></script>
+  <script>
+    const scene = new L7.Scene({
+      id: 'map',
+      map: new L7.Mapbox({
+        pitch: 40,
+        style: {
+          version: 8,
+          sprite: 'https://lzxue.github.io/font-glyphs/sprite/sprite',
+          glyphs:
+            'https://gw.alipayobjects.com/os/antvdemo/assets/mapbox/glyphs/{fontstack}/{range}.pbf',
+          sources: {},
+          layers: [
+            {
+              id: 'background',
+              type: 'background',
+              paint: {
+                'background-color': '#2b2b3a'
+              }
+            }
+          ]
+        },
+        center: [116.405338, 39.914687],
+        zoom: 2.5
+      })
+    });
+    scene.on('loaded', () => {
+      Promise.all([
+        fetch('/js/country.json').then(d => d.json()),
+        fetch('https://gw.alipayobjects.com/os/basement_prod/a5ac7bce-181b-40d1-8a16-271356264ad8.json').then(d => d.text())
+      ]).then(function onLoad([world]) {
+        //散点
+        var dotData = [{
+          area: "北京",
+          dotid: 0,
+          entryAmount: "0.02",
+          info: "北京 入境金额：$0.02万, 出境金额：$485.21万",
+          lat: 39.914687,
+          lng: 116.405338,
+          name: "北京",
+          outboundAmount: "485.21",
+          type: "ok",
+          value: 0.02
+        }, {
+          area: "郑州",
+          dotid: 0,
+          entryAmount: "0.02",
+          info: "郑州 入境金额：$0.02万, 出境金额：$485.21万",
+          lat: 34.75605,
+          lng: 113.634291,
+          name: "郑州",
+          outboundAmount: "85.21",
+          type: "ok",
+          value: 0.02
+        }]
+        //流向
+        var flydata = [
+          {
+            coord: [
+              [116.405338, 39.914687],
+              [113.634291, 34.75605]
+            ]
+          }
+        ]
+
+        const worldLine = new L7.LineLayer()
+          .source(world)
+          .color('#41fc9d')
+          .size(0.5)
+          .style({
+            opacity: 0.4
+          });
+        const dotPoint = new L7.PointLayer()
+          .source(dotData, {
+            parser: {
+              type: 'json',
+              x: 'lng',
+              y: 'lat'
+            }
+          })
+          .shape('circle')
+          .color('#ffed11')
+          .animate(true)
+          .size(40)
+          .style({
+            opacity: 1.0
+          });
+        const flyLine = new L7.LineLayer()
+          .source(flydata, {
+            parser: {
+              type: 'json',
+              coordinates: 'coord'
+            }
+          })
+          .color('#ff6b34')
+          .shape('arc3d')
+          .size(2)
+          .active(true)
+          .animate({
+            interval: 2,
+            trailLength: 2,
+            duration: 1
+          })
+          .style({
+            opacity: 1
+          });
+        scene.addLayer(worldLine);
+        scene.addLayer(dotPoint);
+        scene.addLayer(flyLine);
+      });
+
+    });
+
+
+  </script>
+</body>
+
+</html>
